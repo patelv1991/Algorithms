@@ -6,6 +6,6 @@ def subsets(arr)
 
   val = arr[0]
   subs = subsets(arr.drop(1))
-  new_subs = subs.map { |sub| [val] + sub }
-  new_subs + subs
+  new_subs = subs.map { |sub|  [val] + sub }
+  subs + new_subs
 end
