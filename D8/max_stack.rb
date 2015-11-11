@@ -1,7 +1,7 @@
 # Implement a stack with a method max that returns the maximum value of the
 # stack. max should run in O(1) time.
 
-class Stack
+class MaxStack
   attr_reader :value
 
   def initialize
@@ -9,7 +9,8 @@ class Stack
   end
 
   def pop
-    @value.pop
+    val, max = @value.pop
+    val
   end
 
   def push(val)
