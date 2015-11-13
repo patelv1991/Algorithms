@@ -29,7 +29,7 @@ def file_list(hash)
   hash.each do |item, nested_item|
     if nested_item.is_a?(Hash)
       folder = item
-      p nested_files = file_list(nested_item)
+      nested_files = file_list(nested_item)
       nested_files.each { |file| files << "#{folder}/#{file}" }
     else
       files << item
