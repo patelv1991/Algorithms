@@ -109,3 +109,57 @@ class MinMaxStack
     values
   end
 end
+
+class MinMaxStackQueue
+
+  def initialize
+    @in = MinMaxStack.new
+    @out = MinMaxStack.new
+  end
+
+  def enqueue(val)
+    @in.push(val)
+  end
+
+  def dequeue
+    if @out.empty?
+      @out.push(@in.pop[:value]) until @in.empty?
+    end
+    @out.pop
+  end
+
+  def queue
+    @out.stack.reverse + @in.stack
+  end
+
+  def length
+    @in.length + @out.length
+  end
+
+  def values
+    @out.values.reverse + @in.values
+  end
+
+  def min
+    in_min = @in.min
+    out_min = @out.min
+
+    if in_min && out_min
+      [in_min, out_min].min
+    else
+      in_min || out_min
+    end
+  end
+
+  def max
+    in_max = @in.max
+    out_max = @out.max
+
+    if in_max && out_max
+      [in_max, out_max].max
+    else
+      in_max || out_max
+    end
+  end
+
+end
