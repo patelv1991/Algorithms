@@ -22,6 +22,6 @@ class StackQueue
   end
 
   def values
-    @out + @in
+    @out.reverse + @in
   end
 end
