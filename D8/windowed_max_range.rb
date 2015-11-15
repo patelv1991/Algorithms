@@ -101,6 +101,10 @@ class MinMaxStack
     @stack.empty?
   end
 
+  def length
+    @stack.length
+  end
+
   def values
     values = []
     @stack.each do |el|
@@ -162,4 +166,22 @@ class MinMaxStackQueue
     end
   end
 
+end
+
+def improved_windowed_max_range(arr, window)
+  queue = MinMaxStackQueue.new
+  biggest_diff = 0
+
+  arr.each do |el|
+    queue.enqueue(el)
+
+    if queue.length > window
+      queue.dequeue
+    end
+
+    diff = queue.max - queue.min
+    biggest_diff = diff if diff > biggest_diff
+  end
+
+  biggest_diff
 end
