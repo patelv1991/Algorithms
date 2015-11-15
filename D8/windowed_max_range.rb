@@ -60,6 +60,9 @@ end
 
 # O(n) solution
 class MinMaxStack
+
+  attr_reader :stack
+
   def initialize
     # stack format: [{value: val, min: stack_minimum, max: stack_maximum}]
     @stack = []
@@ -93,7 +96,16 @@ class MinMaxStack
   def max
     @stack.last[:max] unless @stack.empty?
   end
-end
 
-class MinMaxStackQueue
+  def empty?
+    @stack.empty?
+  end
+
+  def values
+    values = []
+    @stack.each do |el|
+      values << el[:value]
+    end
+    values
+  end
 end
