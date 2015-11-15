@@ -20,3 +20,39 @@
 # Next, solve StackQueue. Could you use your MinMaxStack to write a
 # MinMaxStackQueue which tracks both the min and max.
 # Last, can you use your MinMaxStackQueue to solve the problem?
+
+# Naive way to solve
+def windowed_max_range(arr, window)
+  subarrays = []
+  i = 0
+
+  while i + window <= arr.length
+    subarray = []
+    count = 0
+
+    j = i
+    until count == window
+      subarray << arr[j]
+      j += 1
+      count += 1
+    end
+
+    subarrays << subarray
+    i += 1
+  end
+
+  p subarrays
+  biggest_diff = 0
+  subarrays.each do |subarray|
+    min = nil
+    max = nil
+
+    subarray.each do |num|
+      min = num  if min.nil? || num < min
+      max = num if max.nil? || num > max
+    end
+
+    biggest_diff = max - min if max-min > biggest_diff
+  end
+  biggest_diff
+end
