@@ -21,7 +21,8 @@
 # MinMaxStackQueue which tracks both the min and max.
 # Last, can you use your MinMaxStackQueue to solve the problem?
 
-# Naive way to solve
+# Naive way to solve (quadratic runtime O(n^2))
+
 def windowed_max_range(arr, window)
   subarrays = []
   i = 0
@@ -41,7 +42,6 @@ def windowed_max_range(arr, window)
     i += 1
   end
 
-  p subarrays
   biggest_diff = 0
   subarrays.each do |subarray|
     min = nil
@@ -54,5 +54,42 @@ def windowed_max_range(arr, window)
 
     biggest_diff = max - min if max-min > biggest_diff
   end
+
   biggest_diff
+end
+
+# O(n) solution
+class MinMaxStack
+  def initialize
+    # stack format: [val, min, max]
+    @stack = []
+  end
+
+  def push(val)
+    if @stack.empty?
+      @stack << [val, val, val]
+    else
+      @stack << [
+        val,
+        (self.min < val) ? self.min : val,
+        (self.max > val) ? self.max : val
+      ]
+    end
+    @stack
+  end
+
+  def pop
+    @stack.pop
+  end
+
+  def min
+    @stack.last[1] unless @stack.empty?
+  end
+
+  def max
+    @stack.last[-1] unless @stack.empty?
+  end
+end
+
+class MinMaxStackQueue
 end
