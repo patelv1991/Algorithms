@@ -61,19 +61,23 @@ end
 # O(n) solution
 class MinMaxStack
   def initialize
-    # stack format: [val, min, max]
+    # stack format: [{value: val, min: stack_minimum, max: stack_maximum}]
     @stack = []
   end
 
   def push(val)
     if @stack.empty?
-      @stack << [val, val, val]
+      @stack << {
+        value: val,
+        min: val,
+        max: val
+      }
     else
-      @stack << [
-        val,
-        (self.min < val) ? self.min : val,
-        (self.max > val) ? self.max : val
-      ]
+      @stack << {
+        value: val,
+        min: (self.min < val) ? self.min : val,
+        max: (self.max > val) ? self.max : val
+      }
     end
     @stack
   end
@@ -83,11 +87,11 @@ class MinMaxStack
   end
 
   def min
-    @stack.last[1] unless @stack.empty?
+    @stack.last[:min] unless @stack.empty?
   end
 
   def max
-    @stack.last[-1] unless @stack.empty?
+    @stack.last[:max] unless @stack.empty?
   end
 end
 
