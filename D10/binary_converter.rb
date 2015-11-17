@@ -1,3 +1,5 @@
+# Write a function that takes an integer and returns it in binary form.
+
 def binary(num)
   max_power = -1
   temp_num = 1
@@ -20,4 +22,17 @@ def binary(num)
   end
 
   binary
+end
+
+def binary2(num)
+  result = []
+
+  # Technically this unshift unnecessarily slow. I could push each
+  # time, then reverse! after the loop.
+  until num == 0
+    result.unshift(num % 2)
+    num /= 2
+  end
+
+  result.empty? ? "0" : result.join
 end
